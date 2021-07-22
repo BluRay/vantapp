@@ -4,6 +4,9 @@
       <van-icon name="setting-o" size="18" />
     </template>
   </van-nav-bar>
+  <van-cell-group>
+    <van-cell title="认证信息" :value="$store.state.token" label="TOKEN" />
+  </van-cell-group>
   <van-tabbar v-model="active" @change="onChange">
     <van-tabbar-item icon="home-o">标签1</van-tabbar-item>
     <van-tabbar-item icon="search">标签2</van-tabbar-item>

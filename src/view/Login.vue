@@ -1,5 +1,5 @@
 <template>
-	<van-nav-bar title="Vant" />
+	<van-nav-bar title="VantApp" />
 	<van-form @submit="toHome">
 		<van-field
 			v-model="username"
@@ -17,8 +17,9 @@
 			:rules="[{ required: true, message: '请填写密码' }]"
 		/>
 		<div style="margin: 16px;">
-			<van-button type="primary" round block native-type="submit">提交</van-button>
+			<van-button type="primary" round block @click="handleLogin">提交</van-button>
 		</div>
+		<p>{{$store.state.token}}</p>
 	</van-form>
 </template>
 <script>
@@ -39,11 +40,24 @@ export default {
 	},
 	data() {
     return {
+      loginForm: {
+        username: 'admin',
+        password: 'admin'
+      },
       username: 'admin',
       password: '123456',
     };
   },
 	methods: {
+		handleLogin() {
+			console.log('-->handleLogin')
+			this.$store.dispatch('login', this.loginForm)
+			.then(() => {
+				this.$router.push({ path: this.redirect || '/home', query: this.otherQuery })
+			})
+			.catch(() => {
+			})
+		}
   }
 }
 </script>

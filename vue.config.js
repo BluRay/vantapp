@@ -15,7 +15,17 @@ module.exports = {
     overlay: {
       warnings: false,
       errors: false
-    }
+    },
+    proxy: {
+      ['/appapi']: {
+        target: `http://10.23.5.150:8082`,
+        changeOrigin: true,
+        pathRewrite: {
+          ['^/appapi']: ''
+        }
+      }
+    },
+    disableHostCheck: true
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
