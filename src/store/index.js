@@ -1,5 +1,5 @@
 import {createStore} from 'vuex'
-import { login } from '@/api/user'
+import { login, userList } from '@/api/user'
 
 export default createStore({
 	state: {
@@ -40,6 +40,20 @@ export default createStore({
 				sessionStorage.setItem("TOKEN","");
 				commit('SET_TOKEN','')
 				resolve()
+			})
+		},
+		userList({ commit }){
+			return new Promise((resolve, reject) => {
+				userList({ }).then(response => {
+					console.log('-->response', response)
+					const { data } = response
+					commit('SET_TOKEN', data.token)
+					sessionStorage.setItem("TOKEN",data.token);
+					// setToken(data.token)
+					resolve()
+				}).catch(error => {
+					reject(error)
+				})
 			})
 		},
 		getUserInfo({ state,commit }){

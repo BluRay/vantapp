@@ -7,3 +7,10 @@ export function login(data) {
     data
   })
 }
+export function userList(data) {
+  return request({
+    url: '/user/pageList',
+    method: 'POST',
+    data
+  })
+}

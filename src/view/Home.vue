@@ -5,9 +5,6 @@
     </template>
   </van-nav-bar>
   <component :is="apps"></component>
-  <van-cell-group>
-    <van-cell title="认证信息" :value="userToken" label="sessionStorage" />
-  </van-cell-group>
   <van-tabbar v-model="active" @change="onChange">
     <van-tabbar-item icon="home-o">标签1</van-tabbar-item>
     <van-tabbar-item icon="search">标签2</van-tabbar-item>
@@ -26,11 +23,10 @@ export default {
       userToken: '',
       active: 0,
       show: true,
-      apps: null,
+      apps: null
     }
   },
   created() {
-    this.getUserInfo()
     this.apps = defineAsyncComponent(() => import(`@/components/tab1/index.vue`))
   },
   methods: {
@@ -58,10 +54,6 @@ export default {
 			})
 			.catch(() => {
 			})
-    },
-    getUserInfo() {
-      this.userToken = sessionStorage.getItem('TOKEN');
-      // this.$store.dispatch('getUserInfo')
     }
   }
 }
