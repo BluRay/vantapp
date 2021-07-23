@@ -27,11 +27,19 @@ export default createStore({
 					console.log('-->response', response)
 					const { data } = response
 					commit('SET_TOKEN', data.token)
+					sessionStorage.setItem("TOKEN",data.token);
 					// setToken(data.token)
 					resolve()
 				}).catch(error => {
 					reject(error)
 				})
+			})
+		},
+		logout({ commit }){
+			new Promise(resolve => {
+				sessionStorage.setItem("TOKEN","");
+				commit('SET_TOKEN','')
+				resolve()
 			})
 		},
 		getUserInfo({ state,commit }){
