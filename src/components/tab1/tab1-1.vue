@@ -1,7 +1,6 @@
 <template>
-  <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+  <van-pull-refresh @refresh="onRefresh">
     <van-list
-      v-model="loading"
       :finished="finished"
       finished-text="没有更多了"
       @load="onLoad"
@@ -16,6 +15,7 @@ export default {
   data() {
     return {
       tableData: {pageSize: 20,currentPage: 1},
+      finished: true,
       list: []
     }
   },
@@ -23,6 +23,10 @@ export default {
     this.getUserList()
   },
   methods: {
+    onLoad() {
+    },
+    onRefresh() {
+    },
     getUserList() {
       userList({
         pageSize: this.tableData.pageSize,

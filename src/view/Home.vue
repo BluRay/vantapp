@@ -4,7 +4,7 @@
       <van-icon name="setting-o" size="22" />
     </template>
   </van-nav-bar>
-  <component :is="apps"></component>
+  <component :is="apps.component"></component>
   <van-tabbar v-model="active" @change="onChange">
     <van-tabbar-item icon="home-o">标签1</van-tabbar-item>
     <van-tabbar-item icon="search">标签2</van-tabbar-item>
@@ -14,7 +14,7 @@
 </template>
 <script>
 import { Notify, Toast } from 'vant'
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent, shallowRef } from 'vue'
 export default {
   name: 'HomePage',
   components: {},
@@ -27,7 +27,8 @@ export default {
     }
   },
   created() {
-    this.apps = defineAsyncComponent(() => import(`@/components/tab1/index.vue`))
+    this.apps = shallowRef({component: defineAsyncComponent(() => import(`@/components/tab1/index.vue`))})
+    // this.apps = defineAsyncComponent(() => import(`@/components/tab1/index.vue`))
   },
   methods: {
     onChange(index) {
@@ -39,10 +40,10 @@ export default {
       });
       switch (index) {
       case 0 :
-        this.apps = defineAsyncComponent(() => import(`@/components/tab1/index.vue`))
+        this.apps = shallowRef({component: defineAsyncComponent(() => import(`@/components/tab1/index.vue`))})
         break;
       case 1 :
-        this.apps = defineAsyncComponent(() => import(`@/components/tab1/tab1-1.vue`))
+        this.apps = shallowRef({component: defineAsyncComponent(() => import(`@/components/tab1/tab1-1.vue`))})
         break;
       }
     },

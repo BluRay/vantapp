@@ -2,14 +2,14 @@
 	<van-nav-bar title="VantApp" />
 	<van-form @submit="toHome">
 		<van-field
-			v-model="username"
+			v-model="loginForm.username"
 			name="用户名"
 			label="用户名"
 			placeholder="用户名"
 			:rules="[{ required: true, message: '请填写用户名' }]"
 		/>
 		<van-field
-			v-model="password"
+			v-model="loginForm.password"
 			type="password"
 			name="密码"
 			label="密码"
@@ -43,9 +43,7 @@ export default {
       loginForm: {
         username: 'admin',
         password: 'admin'
-      },
-      username: 'admin',
-      password: '123456',
+      }
     };
   },
 	methods: {
@@ -53,7 +51,7 @@ export default {
 			console.log('-->handleLogin')
 			this.$store.dispatch('login', this.loginForm)
 			.then(() => {
-				this.$router.push({ path: this.redirect || '/home', query: this.otherQuery })
+				this.$router.push({ path: this.redirect || '/home' })
 			})
 			.catch(() => {
 			})

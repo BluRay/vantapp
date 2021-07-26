@@ -24,13 +24,14 @@ export default createStore({
 			const { username, password } = userInfo
 			return new Promise((resolve, reject) => {
 				login({ username: username.trim(), password: password }).then(response => {
-					console.log('-->response', response)
+					console.log('-->login response', response)
 					const { data } = response
 					commit('SET_TOKEN', data.token)
 					sessionStorage.setItem("TOKEN",data.token);
 					// setToken(data.token)
 					resolve()
 				}).catch(error => {
+					console.log('-->login error', error)
 					reject(error)
 				})
 			})

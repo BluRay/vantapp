@@ -26,10 +26,14 @@ service.interceptors.response.use(
     const res = response.data
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 20000 && !res.success) {
-
+      if (res.code === -10) {
+        alert(res.msg)
+        store.dispatch('logout').then(() => {
+          location.reload()
+        })
+      }
       // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
       if (res.code === -1 || res.code === 50008 || res.code === 50012 || res.code === 50014) {
-        // to re-login
         alert('登录超时!')
         store.dispatch('logout').then(() => {
           location.reload()
@@ -40,7 +44,7 @@ service.interceptors.response.use(
       const refreshtoken = response.headers.refreshtoken || ''
       if (refreshtoken !== '') {
         console.log('-->refreshtoken : ' + refreshtoken)
-        // setToken(refreshtoken)
+        sessionStorage.setItem("TOKEN",refreshtoken);
       }
       return res
     }
