@@ -6,11 +6,18 @@
   </van-nav-bar>
   <component :is="apps.component"></component>
   <van-tabbar v-model="active" @change="onChange">
-    <van-tabbar-item icon="home-o">标签1</van-tabbar-item>
-    <van-tabbar-item icon="search">标签2</van-tabbar-item>
-    <van-tabbar-item icon="friends-o">标签3</van-tabbar-item>
-    <van-tabbar-item icon="setting-o">标签4</van-tabbar-item>
+    <van-tabbar-item icon="home-o">首页</van-tabbar-item>
+    <van-tabbar-item icon="search">搜索</van-tabbar-item>
+    <van-tabbar-item icon="friends-o">用户</van-tabbar-item>
+    <van-tabbar-item icon="setting-o">设置</van-tabbar-item>
   </van-tabbar>
+  <van-popup v-model:show="popupShow" position="right" :style="{ height: '100%' }">
+    <van-sidebar v-model="active">
+      <van-sidebar-item title="个人中心" />
+      <van-sidebar-item badge="8" title="系统消息" />
+      <van-sidebar-item @click="handleLogout" title="退出" />
+    </van-sidebar>
+  </van-popup>
 </template>
 <script>
 import { Notify, Toast } from 'vant'
@@ -22,13 +29,12 @@ export default {
     return {
       userToken: '',
       active: 0,
-      show: true,
+      popupShow: false,
       apps: null
     }
   },
   created() {
     this.apps = shallowRef({component: defineAsyncComponent(() => import(`@/components/tab1/index.vue`))})
-    // this.apps = defineAsyncComponent(() => import(`@/components/tab1/index.vue`))
   },
   methods: {
     onChange(index) {
@@ -48,6 +54,9 @@ export default {
       }
     },
     onClickRight() {
+      this.popupShow = true
+    },
+    handleLogout(){
       Notify({ type: 'primary', message: '退出成功' });
       this.$store.dispatch('logout', this.loginForm)
 			.then(() => {

@@ -1,5 +1,10 @@
 <template>
 	<van-nav-bar title="VantApp" />
+	<van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
+		<van-swipe-item><van-icon name="smile-comment" /></van-swipe-item>
+		<van-swipe-item><van-icon name="fire" /></van-swipe-item>
+		<van-swipe-item><van-icon name="gift-card" /></van-swipe-item>
+	</van-swipe>
 	<van-form @submit="toHome">
 		<van-field
 			v-model="loginForm.username"
@@ -17,9 +22,8 @@
 			:rules="[{ required: true, message: '请填写密码' }]"
 		/>
 		<div style="margin: 16px;">
-			<van-button type="primary" round block @click="handleLogin">提交</van-button>
+			<van-button type="primary" round block @click="handleLogin">登录</van-button>
 		</div>
-		<p>{{$store.state.token}}</p>
 	</van-form>
 </template>
 <script>
@@ -60,4 +64,11 @@ export default {
 }
 </script>
 <style scoped>
+.my-swipe .van-swipe-item {
+    color: #fff;
+    font-size: 20px;
+    line-height: 150px;
+    text-align: center;
+    background-color: #39a9ed;
+  }
 </style>

@@ -2,7 +2,9 @@
   <component :is="apps.component"></component>
   <van-cell-group>
     <van-cell title="认证信息" :value="userToken" label="tab1" />
-    <van-button type="primary" @click="btn_click">主要按钮</van-button>
+    <van-row justify="center">
+      <van-button type="primary" @click="btn_click">主要按钮</van-button>
+    </van-row>
   </van-cell-group>
 </template>
 <script>
