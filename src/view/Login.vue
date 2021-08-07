@@ -1,5 +1,5 @@
 <template>
-	<van-nav-bar title="VantApp" />
+	<van-nav-bar title="VantApp" left-text="注册" @click-left="handleSignIn"/>
 	<van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
 		<van-swipe-item><van-icon name="smile-comment" /></van-swipe-item>
 		<van-swipe-item><van-icon name="fire" /></van-swipe-item>
@@ -22,7 +22,7 @@
 			:rules="[{ required: true, message: '请填写密码' }]"
 		/>
 		<div style="margin: 16px;">
-			<van-button type="primary" round block @click="handleLogin">登录</van-button>
+			<van-button type="primary" round block size="normal" @click="handleLogin">登录</van-button>
 		</div>
 	</van-form>
 </template>
@@ -59,6 +59,10 @@ export default {
 			})
 			.catch(() => {
 			})
+		},
+		handleSignIn() {
+			console.log('-->handleSignIn')
+			
 		}
   }
 }
