@@ -62,7 +62,7 @@ export default {
 		},
 		handleSignIn() {
 			console.log('-->handleSignIn')
-			
+			Toast.success('TODO:用户注册功能...');
 		}
   }
 }
