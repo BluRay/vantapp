@@ -26,9 +26,8 @@ export default createStore({
 				login({ username: username.trim(), password: password }).then(response => {
 					console.log('-->login response', response)
 					const { data } = response
-					commit('SET_TOKEN', data.token)
-					sessionStorage.setItem("TOKEN",data.token);
-					// setToken(data.token)
+					commit('SET_TOKEN', data.result.token)
+					sessionStorage.setItem("TOKEN",data.result.token);
 					resolve()
 				}).catch(error => {
 					console.log('-->login error', error)

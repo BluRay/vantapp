@@ -25,6 +25,11 @@
 			<van-button type="primary" round block size="normal" @click="handleLogin">登录</van-button>
 		</div>
 	</van-form>
+	<!-- <van-cell>
+	<van-col style="height: 240px;">
+		<video id="myvideo" style="width: 100%; height: 100%; object-fit: fill" autoplay controls src="WeChat_20220207163415.mp4"></video>
+	</van-col>
+	</van-cell> -->
 </template>
 <script>
 import { useRouter } from 'vue-router'
@@ -46,7 +51,7 @@ export default {
     return {
       loginForm: {
         username: 'admin',
-        password: 'admin'
+        password: ''
       }
     };
   },
