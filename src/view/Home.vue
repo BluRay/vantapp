@@ -51,6 +51,12 @@ export default {
       case 1 :
         this.apps = shallowRef({component: defineAsyncComponent(() => import(`@/components/tab1/tab1-1.vue`))})
         break;
+      case 2 :
+        this.apps = shallowRef({component: defineAsyncComponent(() => import(`@/components/tab2/index.vue`))})
+        break;
+      case 3 :
+        this.apps = shallowRef({component: defineAsyncComponent(() => import(`@/components/tab3/index.vue`))})
+        break;
       }
     },
     onClickRight() {
