@@ -14,10 +14,19 @@
   <van-popup v-model:show="popupShow" position="right" :style="{ height: '100%' }">
     <van-sidebar v-model="active">
       <van-sidebar-item title="个人中心" />
-      <van-sidebar-item badge="8" title="系统消息" />
+      <van-sidebar-item :badge="msgCount" @click="showSysMsg" title="系统消息" />
       <van-sidebar-item @click="handleLogout" title="退出" />
     </van-sidebar>
   </van-popup>
+  <van-dialog v-model:show="dialogShow">
+    <van-cell-group inset :style="{ height: '40%' }">
+      <van-cell title="系统通知" value="WELCOME" />
+      <van-cell title="系统通知1" value="欢迎使用" label="欢迎使用" />
+      <van-cell title="系统通知2" value="欢迎使用" label="欢迎使用" />
+      <van-cell title="系统通知3" value="欢迎使用" label="欢迎使用" />
+      <van-cell title="系统通知4" value="欢迎使用" label="欢迎使用" />
+    </van-cell-group>
+  </van-dialog>
 </template>
 <script>
 import { Notify, Toast } from 'vant'
@@ -30,7 +39,9 @@ export default {
       userToken: '',
       active: 0,
       popupShow: false,
-      apps: null
+      dialogShow: false,
+      apps: null,
+      msgCount: 5
     }
   },
   created() {
@@ -61,6 +72,14 @@ export default {
     },
     onClickRight() {
       this.popupShow = true
+    },
+    showSysMsg() {
+      this.dialogShow = true
+      /** Dialog.alert({
+        title: '系统通知', message: '欢迎使用', theme: 'round-button',
+      }).then(() => {
+        // on close
+      }); **/
     },
     handleLogout(){
       Notify({ type: 'primary', message: '退出成功' });
